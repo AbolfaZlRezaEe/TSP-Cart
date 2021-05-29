@@ -1,7 +1,8 @@
-package com.abproject.tsp_cart
+package com.abproject.tsp_cart.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.abproject.tsp_cart.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
