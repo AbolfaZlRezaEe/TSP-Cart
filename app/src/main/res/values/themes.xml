@@ -9,7 +9,7 @@
         <item name="background">@color/white</item>
         <item name="colorOnBackground">@color/tan</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/tan</item>
+        <item name="colorSecondary">@color/darkTan</item>
         <item name="colorOnSecondary">@color/wheat</item>
         <!-- Surface brand color. -->
         <item name="colorSurface">@color/mistyRose</item>

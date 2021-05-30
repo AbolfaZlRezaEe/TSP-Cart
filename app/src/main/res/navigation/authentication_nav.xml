@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authentication_nav"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/authSectionFragment"
+        tools:layout="@layout/fragment_auth_section"
+        android:name="com.abproject.tsp_cart.view.auth.fragments.AuthSectionFragment"
+        android:label="AuthSectionFragment" >
+        <action
+            android:id="@+id/action_authSectionFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_authSectionFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_authSectionFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        tools:layout="@layout/fragment_signin"
+        android:name="com.abproject.tsp_cart.view.auth.fragments.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_authSectionFragment"
+            app:destination="@id/authSectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_signup"
+        android:name="com.abproject.tsp_cart.view.auth.fragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_authSectionFragment"
+            app:destination="@id/authSectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        tools:layout="@layout/fragment_welcome"
+        android:name="com.abproject.tsp_cart.view.auth.fragments.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_authSectionFragment"
+            app:destination="@id/authSectionFragment" />
+    </fragment>
+</navigation>

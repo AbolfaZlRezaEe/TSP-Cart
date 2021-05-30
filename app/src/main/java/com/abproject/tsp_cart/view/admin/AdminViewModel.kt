@@ -7,9 +7,11 @@ import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.model.repository.AdminRepository
 import com.abproject.tsp_cart.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class AdminViewModel @Inject constructor(
     private val adminRepository: AdminRepository,
 ) : TSPViewModel() {

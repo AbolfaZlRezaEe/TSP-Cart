@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tan"
+    android:fillViewport="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/background_sign_up_page" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/toolbarSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true">
+
+                    <ImageView
+                        android:id="@+id/backButtonSignUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="@+id/titleSignUpTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/titleSignUpTextView"
+                        app:srcCompat="@drawable/ic_back" />
+
+                    <TextView
+                        android:id="@+id/titleSignUpTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="@string/signUP"
+                        android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="36dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/fullNameSignUpEditText"
+                        style="@style/Widget.AppCompat.EditText.TSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="66dp"
+                        android:layout_marginEnd="66dp"
+                        android:hint="@string/fullName"
+                        android:background="@drawable/background_auth_edit_text"
+                        android:textColorHint="@color/bisque50"
+                        android:inputType="textEmailAddress" />
+
+                    <EditText
+                        android:id="@+id/emailSignUpEditText"
+                        style="@style/Widget.AppCompat.EditText.TSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="66dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="66dp"
+                        android:hint="@string/email"
+                        android:background="@drawable/background_auth_edit_text"
+                        android:textColorHint="@color/bisque50"
+                        android:inputType="textEmailAddress" />
+
+                    <EditText
+                        android:id="@+id/usernameSignUpEditText"
+                        style="@style/Widget.AppCompat.EditText.TSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="66dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="66dp"
+                        android:background="@drawable/background_auth_edit_text"
+                        android:textColorHint="@color/bisque50"
+                        android:hint="@string/username" />
+
+                    <EditText
+                        android:id="@+id/passwordSignUpEditText"
+                        style="@style/Widget.AppCompat.EditText.TSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="66dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="66dp"
+                        android:hint="@string/password"
+                        android:background="@drawable/background_auth_edit_text"
+                        android:textColorHint="@color/bisque50"
+                        android:inputType="textPassword" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/signUpButton"
+                        style="@style/Widget.MaterialComponent.Button.TSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="66dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="66dp"
+                        android:fontFamily="@font/gilroy_semibold"
+                        android:text="@string/signUP" />
+                </LinearLayout>
+            </RelativeLayout>
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

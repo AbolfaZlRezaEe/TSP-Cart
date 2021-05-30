@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TSPCart">
-        <activity android:name=".view.admin.AdminActivity">
+        <activity android:name=".view.user.UserActivity"></activity>
+        <activity android:name=".view.auth.AuthActivity" />
+        <activity android:name=".view.admin.AdminActivity" />
+        <activity android:name=".view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

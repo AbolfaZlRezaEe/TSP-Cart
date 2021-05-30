@@ -10,6 +10,7 @@
     <color name="darkTan">#5A5244</color>
     <color name="wheat">#e7d4b5</color>
     <color name="bisque">#f6e6cb</color>
+    <color name="bisque50">#80F6E6CB</color>
     <color name="mistyRose">#e3cdc1</color>
 
 </resources>

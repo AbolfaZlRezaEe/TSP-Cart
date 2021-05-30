@@ -1,4 +1,4 @@
-package com.abproject.tsp_cart.model.database
+package com.abproject.tsp_cart.model.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

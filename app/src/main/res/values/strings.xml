@@ -3,4 +3,23 @@
     <string name="addProduct">Add Product</string>
     <string name="hi">Hi</string>
     <string name="nothingForShowHere">Nothing for show here...</string>
+    <string name="loading">Loading</string>
+    <string name="admin">Admin</string>
+    <string name="user">User</string>
+    <string name="forUser">For User</string>
+    <string name="forAdmin">For Admin</string>
+    <string name="signIn">Sign In</string>
+    <string name="signUP">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="fullName">FullName</string>
+    <string name="adminPanel">Admin Panel</string>
+    <string name="cart">Cart</string>
+    <string name="userPanel">User Panel</string>
+    <string name="fullNameError">Please Enter Your FullName!</string>
+    <string name="emailError">Please Enter Your Email!</string>
+    <string name="wrongEmail">Please Enter Valid Email!</string>
+    <string name="usernameError">Please Enter Username!</string>
+    <string name="passwordError">Please Enter Password!</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.abproject.tsp_cart.util
 
 import android.net.Uri
+import android.util.Patterns
 import android.widget.ImageView
 import android.widget.TextView
 import com.abproject.tsp_cart.model.dataclass.Product
@@ -22,3 +23,6 @@ fun TextView.loadProductPrice(
     else
         this.text = product.discountedProductPrice
 }
+
+fun CharSequence.checkEmailIsValid() =
+    !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()

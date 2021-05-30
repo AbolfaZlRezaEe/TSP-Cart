@@ -1,7 +1,7 @@
 package com.abproject.tsp_cart.model.repository
 
 import androidx.lifecycle.LiveData
-import com.abproject.tsp_cart.model.database.ProductDao
+import com.abproject.tsp_cart.model.database.dao.ProductDao
 import com.abproject.tsp_cart.model.dataclass.Product
 import javax.inject.Inject
 
