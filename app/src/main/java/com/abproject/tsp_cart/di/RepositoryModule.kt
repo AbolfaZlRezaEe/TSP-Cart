@@ -1,6 +1,7 @@
 package com.abproject.tsp_cart.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.abproject.tsp_cart.model.database.dao.ProductDao
 import com.abproject.tsp_cart.model.database.dao.UserDao
 import com.abproject.tsp_cart.model.repository.AdminRepository
@@ -31,7 +32,12 @@ object RepositoryModule {
     fun provideAuthRepository(
         @ApplicationContext context: Context,
         userDao: UserDao,
+        sharedPreferences: SharedPreferences,
     ): AuthRepository {
-        return AuthRepositoryImpl(context, userDao)
+        return AuthRepositoryImpl(
+            context,
+            userDao,
+            sharedPreferences
+        )
     }
 }

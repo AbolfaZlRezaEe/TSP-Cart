@@ -6,4 +6,7 @@ object Variables {
     const val EXTRA_KEY_ADMIN_LOGIN = "admin is login"
     const val KEY_ADMIN = "admin"
     const val SHARED_PREFERENCES_NAME = "tool_file"
+    const val SHARED_KEY_ADMIN = "is_admin"
+    const val SHARED_KEY_USER = "is_user"
+    const val SHARED_KEY_USERNAME = "user_name"
 }

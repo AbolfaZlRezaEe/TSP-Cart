@@ -89,6 +89,7 @@ class SignInFragment : TSPFragment() {
                 authViewModel.checkUserInformation(
                     binding.usernameSignInEditText.text.toString(),
                     binding.passwordSignInEditText.text.toString(),
+                    isAdmin(),
                     requireContext()
                 )
             } else

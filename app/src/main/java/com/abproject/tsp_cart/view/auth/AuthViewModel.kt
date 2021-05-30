@@ -61,6 +61,7 @@ class AuthViewModel @Inject constructor(
     fun checkUserInformation(
         username: String,
         password: String,
+        isAdmin: Boolean,
         context: Context,
     ) {
         val checkUserJob = viewModelScope.launch {
@@ -69,6 +70,19 @@ class AuthViewModel @Inject constructor(
             if (result != null) {
                 val decryptedPassword = EncryptionTools(context).decryptRSA(result.password)
                 if (decryptedPassword == password) {
+
+                    authRepository.loadApplicationData(
+                        username = username,
+                        isAdmin = isAdmin,
+                        isUser = !isAdmin
+                    )
+
+                    authRepository.saveApplicationDataInSharedPrefs(
+                        username = username,
+                        isAdmin = isAdmin,
+                        isUser = !isAdmin
+                    )
+
                     _userExistingResult.postValue(Resource.Success(true, null))
                 } else
                     _userExistingResult.postValue(Resource.Error(null,
