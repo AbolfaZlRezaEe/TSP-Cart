@@ -22,4 +22,10 @@
     <string name="wrongEmail">Please Enter Valid Email!</string>
     <string name="usernameError">Please Enter Username!</string>
     <string name="passwordError">Please Enter Password!</string>
+    <string name="price">Price:</string>
+    <string name="discountedPrice">Discounted Price:</string>
+    <string name="inventory">Inventory:</string>
+    <string name="sold">Sold:</string>
+    <string name="addToCart">Add To Cart</string>
+    <string name="description">Description:</string>
 </resources>

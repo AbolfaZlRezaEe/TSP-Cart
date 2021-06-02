@@ -1,5 +1,6 @@
 package com.abproject.tsp_cart.view.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -10,6 +11,8 @@ import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityAdminBinding
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.Resource
+import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_ADMIN_DETAIL
+import com.abproject.tsp_cart.view.productdetail.ProductDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -141,5 +144,11 @@ class AdminActivity : TSPActivity(),
 
     override fun onEdit(product: Product) {
         TODO("Go to Product creator with edit bundle.")
+    }
+
+    override fun onclick(product: Product) {
+        startActivity(Intent(this, ProductDetailActivity::class.java).apply {
+            putExtra(EXTRA_KEY_ADMIN_DETAIL, product)
+        })
     }
 }

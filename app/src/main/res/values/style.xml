@@ -3,7 +3,7 @@
 
     <!-- Appbar Style -->
     <style name="Widget.MaterialComponent.AppBarLayout.TSPAppBarLayout" parent="Widget.Design.AppBarLayout">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/tan</item>
     </style>
 
     <!-- EditText Style -->

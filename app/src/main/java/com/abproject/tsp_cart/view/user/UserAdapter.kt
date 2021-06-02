@@ -1,4 +1,4 @@
-package com.abproject.tsp_cart.view.admin
+package com.abproject.tsp_cart.view.user
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -13,9 +13,9 @@ import com.abproject.tsp_cart.util.loadImage
 import com.abproject.tsp_cart.util.loadProductPrice
 import javax.inject.Inject
 
-class AdminAdapter @Inject constructor(
+class UserAdapter @Inject constructor(
     private val productItemClickListener: ProductItemClickListener,
-) : RecyclerView.Adapter<AdminAdapter.AdminViewHolder>() {
+) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
     private val products: MutableList<Product> = mutableListOf()
@@ -31,40 +31,43 @@ class AdminAdapter @Inject constructor(
         notifyItemInserted(0)
     }
 
-    inner class AdminViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val productImage: ImageView = itemView.findViewById(R.id.imageItemProduct)
         private val productTitle: TextView = itemView.findViewById(R.id.productTitleItemProduct)
         private val productPrice: TextView = itemView.findViewById(R.id.productPriceItemProduct)
-        private val productEditButton: ImageView =
+        private val productButton: ImageView =
             itemView.findViewById(R.id.buttonProductItemProduct)
 
         fun bindProduct(product: Product) {
             productTitle.text = product.productTitle
             productImage.loadImage(Uri.parse(product.thumbnailPicture))
-            loadProductPrice(productPrice, product)
-            productEditButton.setOnClickListener {
-                productItemClickListener.onEdit(product)
+            loadProductPrice(
+                productPrice,
+                product
+            )
+            productButton.setOnClickListener {
+                productItemClickListener.onBuy(product)
             }
             itemView.setOnClickListener {
-                productItemClickListener.onclick(product)
+                productItemClickListener.onClick(product)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminViewHolder {
-        return AdminViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        return UserViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: AdminViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bindProduct(products[position])
     }
 
     override fun getItemCount(): Int = products.size
 
     interface ProductItemClickListener {
-        fun onEdit(product: Product)
-        fun onclick(product: Product)
+        fun onBuy(product: Product)
+        fun onClick(product: Product)
     }
 }

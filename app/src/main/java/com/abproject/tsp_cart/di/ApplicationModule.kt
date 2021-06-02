@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.abproject.tsp_cart.model.database.dao.ProductDao
 import com.abproject.tsp_cart.model.database.TSPDataBase
+import com.abproject.tsp_cart.model.database.dao.CartDao
 import com.abproject.tsp_cart.model.database.dao.UserDao
 import com.abproject.tsp_cart.util.Variables.DATABASE_NAME
 import com.abproject.tsp_cart.util.Variables.SHARED_PREFERENCES_NAME
@@ -51,4 +52,10 @@ object ApplicationModule {
     fun provideUserDao(
         database: TSPDataBase,
     ): UserDao = database.userDao()
+
+    @Provides
+    @Singleton
+    fun provideCartDao(
+        database: TSPDataBase,
+    ): CartDao = database.cartDao()
 }

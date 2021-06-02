@@ -9,4 +9,6 @@ object Variables {
     const val SHARED_KEY_ADMIN = "is_admin"
     const val SHARED_KEY_USER = "is_user"
     const val SHARED_KEY_USERNAME = "user_name"
+    const val EXTRA_KEY_ADMIN_DETAIL = "admin_detail"
+    const val EXTRA_KEY_USER_DETAIL = "user_detail"
 }
