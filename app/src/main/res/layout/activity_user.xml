@@ -47,7 +47,7 @@
                 android:layout_toEndOf="@id/hiTextUser"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 tools:text="Abolfazl" />
 
         </RelativeLayout>

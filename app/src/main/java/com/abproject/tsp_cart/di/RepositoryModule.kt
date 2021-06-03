@@ -21,8 +21,12 @@ object RepositoryModule {
     @Singleton
     fun provideAdminRepository(
         productDao: ProductDao,
+        sharedPreferences: SharedPreferences,
     ): AdminRepository {
-        return AdminRepositoryImpl(productDao)
+        return AdminRepositoryImpl(
+            productDao,
+            sharedPreferences
+        )
     }
 
     @Provides

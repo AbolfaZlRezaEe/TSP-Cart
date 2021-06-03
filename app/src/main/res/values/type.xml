@@ -11,7 +11,7 @@
         <item name="fontFamily">@font/gilroy_black</item>
         <item name="android:fontFamily">@font/gilroy_black</item>
         <item name="android:textColor">@color/bisque</item>
-        <item name="android:textSize">45sp</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
     <style name="TextAppearance.MyTheme.Headline6" parent="TextAppearance.MaterialComponents.Headline6">

@@ -6,6 +6,7 @@ import com.abproject.tsp_cart.model.database.dao.CartDao
 import com.abproject.tsp_cart.model.database.dao.ProductDao
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
+import com.abproject.tsp_cart.util.Variables.SHARED_KEY_EMAIL
 import com.abproject.tsp_cart.util.Variables.SHARED_KEY_USERNAME
 import javax.inject.Inject
 
@@ -46,5 +47,10 @@ class UserRepositoryImpl @Inject constructor(
     override fun getUsernameFromShredPrefs(): String {
         val username = sharedPreferences.getString(SHARED_KEY_USERNAME, null)
         return username ?: ""
+    }
+
+    override fun getEmailFromSharedPrefs(): String {
+        val email = sharedPreferences.getString(SHARED_KEY_EMAIL, null)
+        return email ?: ""
     }
 }

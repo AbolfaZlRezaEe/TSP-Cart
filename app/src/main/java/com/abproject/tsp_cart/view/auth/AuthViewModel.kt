@@ -73,12 +73,14 @@ class AuthViewModel @Inject constructor(
 
                     authRepository.loadApplicationData(
                         username = username,
+                        email = result.email,
                         isAdmin = isAdmin,
                         isUser = !isAdmin
                     )
 
                     authRepository.saveApplicationDataInSharedPrefs(
                         username = username,
+                        email = result.email,
                         isAdmin = isAdmin,
                         isUser = !isAdmin
                     )

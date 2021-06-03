@@ -1,5 +1,7 @@
 package com.abproject.tsp_cart.util
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Patterns
 import android.widget.ImageView
@@ -8,6 +10,7 @@ import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.bumptech.glide.Glide
 import timber.log.Timber
+import java.io.File
 import java.lang.Exception
 
 fun ImageView.loadImage(
@@ -43,4 +46,17 @@ fun totalPriceGenerator(
         Timber.e(e)
         null
     }
+}
+
+fun getHeightFromImageUri(
+    uri: Uri,
+    context: Context,
+): Int {
+    val option = BitmapFactory.Options()
+    option.inJustDecodeBounds = true
+    BitmapFactory.decodeStream(
+        context.contentResolver.openInputStream(uri),
+        null,
+        option)
+    return option.outHeight
 }

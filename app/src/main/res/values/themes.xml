@@ -21,6 +21,6 @@
             @style/Widget.MaterialComponent.AppBarLayout.TSPAppBarLayout
         </item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-
+        <item name="snackbarStyle">@style/Widget.MaterialComponent.SnackBar.TSP</item>
     </style>
 </resources>

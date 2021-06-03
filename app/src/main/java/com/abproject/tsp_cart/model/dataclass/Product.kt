@@ -12,7 +12,6 @@ data class Product(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "product_id")
     var productId: Int? = null,
-    @ColumnInfo(name = "product_title")
     var productTitle: String,
     @ColumnInfo(name = "thumbnail_picture")
     var thumbnailPicture: String,

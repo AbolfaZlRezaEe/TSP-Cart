@@ -7,6 +7,7 @@ import com.abproject.tsp_cart.model.dataclass.ApplicationData
 import com.abproject.tsp_cart.model.dataclass.User
 import com.abproject.tsp_cart.util.EncryptionTools
 import com.abproject.tsp_cart.util.Variables.SHARED_KEY_ADMIN
+import com.abproject.tsp_cart.util.Variables.SHARED_KEY_EMAIL
 import com.abproject.tsp_cart.util.Variables.SHARED_KEY_USER
 import com.abproject.tsp_cart.util.Variables.SHARED_KEY_USERNAME
 import javax.inject.Inject
@@ -28,11 +29,13 @@ class AuthRepositoryImpl @Inject constructor(
 
         saveApplicationDataInSharedPrefs(
             username = user.username,
+            email = user.email,
             isAdmin = user.isManager,
             isUser = !user.isManager
         )
         loadApplicationData(
             username = user.username,
+            email = user.email,
             isAdmin = user.isManager,
             isUser = !user.isManager
         )
@@ -45,11 +48,15 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun loadApplicationData(
         username: String?,
+        email: String?,
         isAdmin: Boolean,
         isUser: Boolean,
     ) {
         username?.let {
             ApplicationData.setUsername(it)
+        }
+        email?.let {
+            ApplicationData.setEmail(it)
         }
         ApplicationData.setUserOrAdmin(
             isUser,
@@ -76,22 +83,16 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun saveApplicationDataInSharedPrefs(
         username: String?,
+        email: String?,
         isAdmin: Boolean,
         isUser: Boolean,
     ) {
         sharedPreferences.edit().apply {
             putString(SHARED_KEY_USERNAME, username)
+            putString(SHARED_KEY_EMAIL, email)
             putBoolean(SHARED_KEY_ADMIN, isAdmin)
             putBoolean(SHARED_KEY_USER, isUser)
         }.apply()
-    }
-
-    override fun clearDataFromObjectAndSharedPrefs() {
-        ApplicationData.clearApplicationData()
-        sharedPreferences
-            .edit()
-            .clear()
-            .apply()
     }
 
     override fun checkDataFromShared(): Boolean {

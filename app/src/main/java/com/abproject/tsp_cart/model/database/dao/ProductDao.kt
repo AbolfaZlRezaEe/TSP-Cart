@@ -19,9 +19,9 @@ interface ProductDao {
     @Query("SELECT * FROM tbl_product")
     fun getAllProducts(): LiveData<List<Product>>
 
-    @Query("SELECT * FROM tbl_product WHERE product_title LIKE :query")
+    @Query("SELECT * FROM tbl_product WHERE productTitle LIKE '%' || :query || '%'")
     suspend fun searchInDatabaseByProductTitle(query: String): List<Product>
 
-    @Query("SELECT * FROM tbl_product WHERE product_title == :productTitle")
+    @Query("SELECT * FROM tbl_product WHERE productTitle == :productTitle")
     suspend fun searchForExistingProduct(productTitle: String): Product?
 }

@@ -31,6 +31,11 @@ class AdminAdapter @Inject constructor(
         notifyItemInserted(0)
     }
 
+    fun clearData() {
+        products.clear()
+        notifyDataSetChanged()
+    }
+
     inner class AdminViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val productImage: ImageView = itemView.findViewById(R.id.imageItemProduct)
         private val productTitle: TextView = itemView.findViewById(R.id.productTitleItemProduct)
@@ -41,7 +46,7 @@ class AdminAdapter @Inject constructor(
         fun bindProduct(product: Product) {
             productTitle.text = product.productTitle
             productImage.loadImage(Uri.parse(product.thumbnailPicture))
-            loadProductPrice(productPrice, product)
+            productPrice.text = product.productPrice
             productEditButton.setOnClickListener {
                 productItemClickListener.onEdit(product)
             }

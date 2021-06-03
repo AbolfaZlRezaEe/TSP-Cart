@@ -45,6 +45,7 @@ class UserAdapter @Inject constructor(
                 productPrice,
                 product
             )
+            productButton.setImageResource(R.drawable.ic_buy)
             productButton.setOnClickListener {
                 productItemClickListener.onBuy(product)
             }

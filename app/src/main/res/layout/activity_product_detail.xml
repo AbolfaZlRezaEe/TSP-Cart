@@ -8,6 +8,7 @@
     tools:context=".view.productdetail.ProductDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -49,8 +50,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
                         android:background="?selectableItemBackground"
-                        app:tint="@color/bisque"
-                        app:srcCompat="@drawable/ic_back" />
+                        app:srcCompat="@drawable/ic_back"
+                        app:tint="@color/bisque" />
 
                     <ImageView
                         android:id="@+id/deleteImageViewDetail"

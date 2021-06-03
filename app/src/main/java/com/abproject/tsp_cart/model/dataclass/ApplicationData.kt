@@ -3,6 +3,8 @@ package com.abproject.tsp_cart.model.dataclass
 object ApplicationData {
     var username: String? = null
         private set
+    var email: String? = null
+        private set
     var isAdmin: Boolean = false
         private set
     var isUser: Boolean = false
@@ -22,6 +24,12 @@ object ApplicationData {
         username: String,
     ) {
         this.username = username
+    }
+
+    fun setEmail(
+        email: String,
+    ) {
+        this.email = email
     }
 
     fun clearApplicationData() {

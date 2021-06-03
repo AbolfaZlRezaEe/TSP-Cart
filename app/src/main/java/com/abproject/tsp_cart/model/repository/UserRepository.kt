@@ -12,5 +12,6 @@ interface UserRepository {
     fun getAllProducts(): LiveData<List<Product>>
     suspend fun getAllProductsByUsername(username: String): List<Cart>
     suspend fun searchInProductsByProductName(productName: String): Cart?
-    fun getUsernameFromShredPrefs():String
+    fun getUsernameFromShredPrefs(): String
+    fun getEmailFromSharedPrefs(): String
 }

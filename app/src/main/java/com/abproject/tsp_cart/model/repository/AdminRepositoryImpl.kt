@@ -1,12 +1,15 @@
 package com.abproject.tsp_cart.model.repository
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.abproject.tsp_cart.model.database.dao.ProductDao
+import com.abproject.tsp_cart.model.dataclass.ApplicationData
 import com.abproject.tsp_cart.model.dataclass.Product
 import javax.inject.Inject
 
 class AdminRepositoryImpl @Inject constructor(
     private val productDao: ProductDao,
+    private val sharedPreferences: SharedPreferences,
 ) : AdminRepository {
 
     override suspend fun insertProduct(product: Product): Boolean {
@@ -37,5 +40,12 @@ class AdminRepositoryImpl @Inject constructor(
     override suspend fun searchForExistingProduct(productTitle: String): Boolean {
         val response = productDao.searchForExistingProduct(productTitle)
         return response != null
+    }
+
+    override fun clearAdminInformation() {
+        sharedPreferences.edit()
+            .clear()
+            .apply()
+        ApplicationData.clearApplicationData()
     }
 }

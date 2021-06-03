@@ -51,8 +51,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="66dp"
                 android:background="@drawable/background_auth_edit_text"
-                android:hint="@string/username"
-                android:textColorHint="@color/bisque50" />
+                android:hint="@string/username"/>
 
             <EditText
                 android:id="@+id/passwordSignInEditText"
@@ -64,8 +63,7 @@
                 android:layout_marginEnd="66dp"
                 android:background="@drawable/background_auth_edit_text"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/bisque50" />
+                android:inputType="textPassword"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signInButton"

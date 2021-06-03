@@ -35,6 +35,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <ImageView
+                        android:id="@+id/logoutButtonAdmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?selectableItemBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_logout" />
+
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
@@ -47,10 +58,12 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/usernameTextViewAdmin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:text="Abolfazl"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.MyTheme.Headline5"
@@ -59,12 +72,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                     <TextView
+                        android:id="@+id/emailTextViewAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Last seen: 1 hour ago."
+                        android:text="abolfazlrezaei.of@gmail.com"
                         android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                        android:textColor="@color/bisque"
                         app:layout_constraintStart_toStartOf="@+id/textView"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                        app:layout_constraintTop_toBottomOf="@+id/usernameTextViewAdmin" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,12 +97,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/searchInProductEditTextAdmin"
                     style="@style/Widget.AppCompat.EditText.TSP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/searchHint"
                     android:paddingStart="46dp"
                     android:paddingEnd="8dp"
+                    android:textColor="@color/darkTan"
+                    android:textColorHint="@color/tan"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="232dp" />
 
@@ -120,6 +138,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:clipToPadding="false"
+                android:paddingBottom="26dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

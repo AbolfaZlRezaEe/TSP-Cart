@@ -2,8 +2,12 @@ package com.abproject.tsp_cart.view.admin
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abproject.tsp_cart.R
@@ -11,7 +15,11 @@ import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityAdminBinding
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.Resource
+import com.abproject.tsp_cart.util.Variables
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_ADMIN_DETAIL
+import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_EDIT_PRODUCT
+import com.abproject.tsp_cart.view.addproduct.AddProductActivity
+import com.abproject.tsp_cart.view.auth.AuthActivity
 import com.abproject.tsp_cart.view.productdetail.ProductDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,77 +37,65 @@ class AdminActivity : TSPActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         getObservers()
 
+        setupSearchInProduct()
+
+        binding.usernameTextViewAdmin.text = adminViewModel.getUserName()
+        binding.emailTextViewAdmin.text = adminViewModel.getEmail()
+
         binding.addProductAdminHome.setOnClickListener {
-            //TODO Go to the product creator
+            startActivity(Intent(this, AddProductActivity::class.java))
         }
+
+        binding.logoutButtonAdmin.setOnClickListener {
+            setupLogoutSection()
+        }
+    }
+
+    private fun setupLogoutSection() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.logoutDialogTitle))
+            .setMessage(getString(R.string.logoutDialogMessage))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                startActivity(Intent(this, AuthActivity::class.java))
+                dialog.dismiss()
+                adminViewModel.clearAdminInformation()
+                finish()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun setupSearchInProduct() {
+        binding.searchInProductEditTextAdmin.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                s?.let { string ->
+                    if (string.isNotEmpty()) {
+                        adminViewModel.searchInProducts(string.toString())
+                    } else {
+                        adminViewModel.searchInProducts("")
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun getObservers() {
         adminViewModel.getAllProducts.observe(this) { response ->
             if (response.isNullOrEmpty()) {
+                adminAdapter.clearData()
                 setVisibilityForEmptyState(true)
             } else {
                 setVisibilityForEmptyState(false)
                 setupRecyclerView(response)
-            }
-        }
-        adminViewModel.insertProductResult.observe(this) { response ->
-            when (response) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                }
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    response.data?.let { isSuccess ->
-                        if (isSuccess)
-                            showSnackBar(response.message!!)
-
-                    }
-                }
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showSnackBar(response.message!!)
-                }
-            }
-        }
-        adminViewModel.updateProductResult.observe(this) { response ->
-            when (response) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                }
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    response.data?.let { isSuccess ->
-                        if (isSuccess)
-                            showSnackBar(response.message!!)
-
-                    }
-                }
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showSnackBar(response.message!!)
-                }
-            }
-        }
-        adminViewModel.deleteProductResult.observe(this) { response ->
-            when (response) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                }
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    response.data?.let { isSuccess ->
-                        if (isSuccess)
-                            showSnackBar(response.message!!)
-
-                    }
-                }
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showSnackBar(response.message!!)
-                }
             }
         }
         adminViewModel.searchInProductResult.observe(this) { response ->
@@ -119,6 +115,8 @@ class AdminActivity : TSPActivity(),
                     showSnackBar(response.message!!)
                 }
                 is Resource.EmptyState -> {
+                    adminAdapter.clearData()
+                    showProgressBar(false)
                     setVisibilityForEmptyState(true)
                 }
             }
@@ -143,7 +141,9 @@ class AdminActivity : TSPActivity(),
     }
 
     override fun onEdit(product: Product) {
-        TODO("Go to Product creator with edit bundle.")
+        startActivity(Intent(this, AddProductActivity::class.java).apply {
+            putExtra(EXTRA_KEY_EDIT_PRODUCT, product)
+        })
     }
 
     override fun onclick(product: Product) {

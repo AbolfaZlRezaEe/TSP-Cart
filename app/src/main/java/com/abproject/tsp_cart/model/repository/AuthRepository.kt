@@ -14,6 +14,7 @@ interface AuthRepository {
 
     fun loadApplicationData(
         username: String? = null,
+        email: String? = null,
         isAdmin: Boolean = false,
         isUser: Boolean = false,
     )
@@ -22,11 +23,11 @@ interface AuthRepository {
 
     fun saveApplicationDataInSharedPrefs(
         username: String? = null,
+        email: String? = null,
         isAdmin: Boolean = false,
         isUser: Boolean = false,
     )
 
-    fun clearDataFromObjectAndSharedPrefs()
 
     fun checkDataFromShared(): Boolean
     fun checkAdminPanelFromShared(): Boolean
