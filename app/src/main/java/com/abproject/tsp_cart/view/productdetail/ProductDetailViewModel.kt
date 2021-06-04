@@ -32,7 +32,7 @@ class ProductDetailViewModel @Inject constructor(
     ) {
         val addToCartJob = viewModelScope.launch {
             _addToCartStatus.postValue(Resource.Loading())
-            val result = userRepository.insertProductToCart(cart)
+            val result = userRepository.insertCart(cart)
             if (result)
                 _addToCartStatus.postValue(Resource.Success(
                     true,
@@ -53,24 +53,24 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
-    fun deleteCart(
-        cart: Cart,
-    ) {
-        val deleteCartJob = viewModelScope.launch {
-            _deleteCartStatus.postValue(Resource.Loading())
-            userRepository.deleteProductToCart(cart)
-            _deleteCartStatus.postValue(Resource.Success(
-                true,
-                "product deleted from the cart successfully!"
-            ))
-        }
-        deleteCartJob.invokeOnCompletion { throwable ->
-            throwable?.message?.let {
-                _deleteCartStatus.postValue(Resource.Error(null,
-                    "Unexpected error occurred!"))
-            }
-        }
-    }
+//    fun deleteCart(
+//        cart: Cart,
+//    ) {
+//        val deleteCartJob = viewModelScope.launch {
+//            _deleteCartStatus.postValue(Resource.Loading())
+//            userRepository.deleteProductToCart(cart)
+//            _deleteCartStatus.postValue(Resource.Success(
+//                true,
+//                "product deleted from the cart successfully!"
+//            ))
+//        }
+//        deleteCartJob.invokeOnCompletion { throwable ->
+//            throwable?.message?.let {
+//                _deleteCartStatus.postValue(Resource.Error(null,
+//                    "Unexpected error occurred!"))
+//            }
+//        }
+//    }
 
     fun deleteProduct(
         product: Product,

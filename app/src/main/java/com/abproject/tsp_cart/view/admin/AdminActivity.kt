@@ -21,6 +21,7 @@ import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_EDIT_PRODUCT
 import com.abproject.tsp_cart.view.addproduct.AddProductActivity
 import com.abproject.tsp_cart.view.auth.AuthActivity
 import com.abproject.tsp_cart.view.productdetail.ProductDetailActivity
+import com.abproject.tsp_cart.view.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -59,7 +60,7 @@ class AdminActivity : TSPActivity(),
             .setTitle(getString(R.string.logoutDialogTitle))
             .setMessage(getString(R.string.logoutDialogMessage))
             .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-                startActivity(Intent(this, AuthActivity::class.java))
+                startActivity(Intent(this, SplashActivity::class.java))
                 dialog.dismiss()
                 adminViewModel.clearAdminInformation()
                 finish()

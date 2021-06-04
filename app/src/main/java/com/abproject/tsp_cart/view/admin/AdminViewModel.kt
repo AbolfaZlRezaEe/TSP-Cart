@@ -49,6 +49,6 @@ class AdminViewModel @Inject constructor(
     }
 
     fun clearAdminInformation() {
-        adminRepository.clearAdminInformation()
+        adminRepository.clearAdminOrUserInformation()
     }
 }

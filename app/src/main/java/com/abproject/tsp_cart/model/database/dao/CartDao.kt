@@ -21,8 +21,8 @@ interface CartDao {
      * username didn't exist so @return emptyList.
      */
     @Query("SELECT * FROM tbl_cart WHERE user_name == :userName")
-    suspend fun getAllProductsByUsername(userName: String): List<Cart>
+    suspend fun getAllProductsFromCartByUsername(userName: String): List<Cart>
 
     @Query("SELECT * FROM tbl_cart WHERE product_name == :productName")
-    suspend fun searchInProductsByProductName(productName: String): Cart?
+    suspend fun searchInProductsByProductNameInCart(productName: String): Cart?
 }

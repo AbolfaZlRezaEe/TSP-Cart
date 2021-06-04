@@ -11,5 +11,5 @@ interface AdminRepository {
     fun getAllProducts(): LiveData<List<Product>>
     suspend fun searchInDatabaseByProductTitle(query: String): List<Product>
     suspend fun searchForExistingProduct(productTitle: String): Boolean
-    fun clearAdminInformation()
+    fun clearAdminOrUserInformation()
 }

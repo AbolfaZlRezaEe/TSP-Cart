@@ -18,9 +18,9 @@ data class Product(
     @ColumnInfo(name = "product_pictures")
     var productPictures: List<String>,
     @ColumnInfo(name = "product_price")
-    var productPrice: String,
+    var productPrice: Long,
     @ColumnInfo(name = "discounted_product_price")
-    var discountedProductPrice: String,
+    var productDiscountPrice: Long,
     @ColumnInfo(name = "product_inventory")
     var productInventory: Long,
     @ColumnInfo(name = "product_sold")

@@ -1,27 +1,21 @@
 package com.abproject.tsp_cart.view.productdetail
 
-import android.graphics.BitmapFactory
+import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
-import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityProductDetailBinding
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.Resource
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_ADMIN_DETAIL
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_USER_DETAIL
-import com.abproject.tsp_cart.util.getHeightFromImageUri
 import com.abproject.tsp_cart.util.loadImage
-import com.google.android.material.appbar.AppBarLayout
+import com.abproject.tsp_cart.view.cart.CartActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.io.File
 
 @AndroidEntryPoint
 class ProductDetailActivity : TSPActivity() {
@@ -73,7 +67,7 @@ class ProductDetailActivity : TSPActivity() {
                         if (isSuccess) {
                             showSnackBar(response.message!!)
                             Handler(Looper.getMainLooper()).postDelayed({
-                                //todo go to the cart activity
+                                startActivity(Intent(this, CartActivity::class.java))
                             }, 2000)
                         }
                     }
@@ -164,8 +158,8 @@ class ProductDetailActivity : TSPActivity() {
             binding.deleteImageViewDetail.visibility = View.VISIBLE
             binding.productThumbnailDetail.loadImage(Uri.parse(adminProduct.thumbnailPicture))
             binding.productTitleDetail.text = adminProduct.productTitle
-            binding.productPriceDetail.text = adminProduct.productPrice
-            binding.productDiscountedPriceDetail.text = adminProduct.discountedProductPrice
+            binding.productPriceDetail.text = "$${adminProduct.productPrice}"
+            binding.productDiscountedPriceDetail.text = "$${adminProduct.productDiscountPrice}"
             binding.productInventoryDetail.text = adminProduct.productInventory.toString()
             binding.productSoldDetail.text = adminProduct.productSold.toString()
         }
@@ -179,8 +173,8 @@ class ProductDetailActivity : TSPActivity() {
             binding.deleteImageViewDetail.visibility = View.GONE
             binding.productThumbnailDetail.loadImage(Uri.parse(userProduct.thumbnailPicture))
             binding.productTitleDetail.text = userProduct.productTitle
-            binding.productPriceDetail.text = userProduct.productPrice
-            binding.productDiscountedPriceDetail.text = userProduct.discountedProductPrice
+            binding.productPriceDetail.text = "$${userProduct.productPrice}"
+            binding.productDiscountedPriceDetail.text = "$${userProduct.productDiscountPrice}"
             binding.productInventoryDetail.text = userProduct.productInventory.toString()
             binding.productSoldDetail.text = userProduct.productSold.toString()
         }

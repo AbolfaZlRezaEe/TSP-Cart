@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.loadImage
-import com.abproject.tsp_cart.util.loadProductPrice
 import javax.inject.Inject
 
 class AdminAdapter @Inject constructor(
@@ -46,7 +45,7 @@ class AdminAdapter @Inject constructor(
         fun bindProduct(product: Product) {
             productTitle.text = product.productTitle
             productImage.loadImage(Uri.parse(product.thumbnailPicture))
-            productPrice.text = product.productPrice
+            productPrice.text = "$${product.productPrice}"
             productEditButton.setOnClickListener {
                 productItemClickListener.onEdit(product)
             }

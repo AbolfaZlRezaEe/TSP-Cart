@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.loadImage
-import com.abproject.tsp_cart.util.loadProductPrice
 import javax.inject.Inject
 
 class UserAdapter @Inject constructor(
     private val productItemClickListener: ProductItemClickListener,
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
 
     private val products: MutableList<Product> = mutableListOf()
 
@@ -41,10 +39,7 @@ class UserAdapter @Inject constructor(
         fun bindProduct(product: Product) {
             productTitle.text = product.productTitle
             productImage.loadImage(Uri.parse(product.thumbnailPicture))
-            loadProductPrice(
-                productPrice,
-                product
-            )
+            productPrice.text = "$${product.productPrice}"
             productButton.setImageResource(R.drawable.ic_buy)
             productButton.setOnClickListener {
                 productItemClickListener.onBuy(product)

@@ -46,4 +46,8 @@
     <string name="logoutDialogMessage">Are you sure you want to logout?</string>
     <string name="yes">Yse</string>
     <string name="no">No</string>
+    <string name="purchaseDetail">Purchase Detail</string>
+    <string name="totalPrice">Total Price</string>
+    <string name="shippingCost">Shipping Cost</string>
+    <string name="PayablePrice">Payable Price</string>
 </resources>

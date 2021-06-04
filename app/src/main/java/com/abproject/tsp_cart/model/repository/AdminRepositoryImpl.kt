@@ -42,7 +42,7 @@ class AdminRepositoryImpl @Inject constructor(
         return response != null
     }
 
-    override fun clearAdminInformation() {
+    override fun clearAdminOrUserInformation() {
         sharedPreferences.edit()
             .clear()
             .apply()

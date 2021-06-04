@@ -7,7 +7,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.forEach
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
-import com.abproject.tsp_cart.util.totalPriceGenerator
 
 
 /**
@@ -41,11 +40,9 @@ abstract class TSPActivity : AppCompatActivity(), TSPInterface {
             productPictures = product.productPictures,
             amount = amount,
             productPrice = product.productPrice,
-            productDiscountedPrice = product.discountedProductPrice,
-            totalPrice = totalPriceGenerator(
-                amount,
-                product.productPrice
-            ) ?: ""
+            productDiscountedPrice = product.productDiscountPrice,
+            productInventory = product.productInventory,
+            productSold = product.productSold
         )
     }
 }

@@ -2,7 +2,6 @@ package com.abproject.tsp_cart.view.addproduct
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -207,8 +206,8 @@ class AddProductActivity : TSPActivity() {
             binding.deleteButtonAddProduct.visibility = View.VISIBLE
             binding.productTitleTextView.text = getString(R.string.editProduct)
             binding.productNameEditText.setText(editProduct.productTitle)
-            binding.productPriceEditText.setText(editProduct.productPrice)
-            binding.productDiscountEditText.setText(editProduct.discountedProductPrice)
+            binding.productPriceEditText.setText("$${editProduct.productPrice}")
+            binding.productDiscountEditText.setText("$${editProduct.productDiscountPrice}")
             binding.productInventoryEditText.setText(editProduct.productInventory.toString())
         }
     }
@@ -217,24 +216,28 @@ class AddProductActivity : TSPActivity() {
         product: Product?,
     ) {
         if (checkValidationOfEditTexts()) {
+            val productPrice =
+                binding.productPriceEditText.text.removePrefix("$").toString().toLong()
+            val productDiscountPrice =
+                binding.productDiscountEditText.text.removePrefix("$").toString().toLong()
             if (product != null) {
                 if (!nothingChange(product)) {
                     product.productTitle = binding.productNameEditText.text.toString()
-                    product.productPrice = binding.productPriceEditText.text.toString()
-                    product.discountedProductPrice = binding.productDiscountEditText.text.toString()
+                    product.productPrice = productPrice
+                    product.productDiscountPrice = productDiscountPrice
                     product.productInventory =
                         binding.productInventoryEditText.text.toString().toLong()
                     product.thumbnailPicture = thumbnailUri ?: product.thumbnailPicture
                     product.productPictures = productPictures ?: product.productPictures
                     addProductViewModel.updateProduct(product)
-                }else{
+                } else {
                     showSnackBar("Please change something or exit in this page!")
                 }
             } else {
                 val product = Product(
                     productTitle = binding.productNameEditText.text.toString(),
-                    productPrice = binding.productPriceEditText.text.toString(),
-                    discountedProductPrice = binding.productDiscountEditText.text.toString(),
+                    productPrice = productPrice,
+                    productDiscountPrice = productDiscountPrice,
                     thumbnailPicture = thumbnailUri ?: "",
                     productPictures = productPictures ?: arrayListOf(),
                     productInventory = binding.productInventoryEditText.text.toString().toLong(),
@@ -250,8 +253,10 @@ class AddProductActivity : TSPActivity() {
         product: Product,
     ): Boolean {
         return (product.productTitle == binding.productNameEditText.text.toString()
-                && product.productPrice == binding.productPriceEditText.text.toString()
-                && product.discountedProductPrice == binding.productDiscountEditText.text.toString()
+                && product.productPrice == binding.productPriceEditText.text
+            .removePrefix("$").toString().toLong()
+                && product.productDiscountPrice == binding.productDiscountEditText.text
+            .removePrefix("$").toString().toLong()
                 && product.productInventory ==
                 binding.productInventoryEditText.text.toString().toLong()
                 && product.thumbnailPicture == thumbnailUri ?: product.thumbnailPicture

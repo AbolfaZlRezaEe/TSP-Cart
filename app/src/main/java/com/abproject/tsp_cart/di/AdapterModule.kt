@@ -2,6 +2,7 @@ package com.abproject.tsp_cart.di
 
 import android.app.Activity
 import com.abproject.tsp_cart.view.admin.AdminAdapter
+import com.abproject.tsp_cart.view.cart.CartAdapterCallBacks
 import com.abproject.tsp_cart.view.user.UserAdapter
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,13 @@ object AdapterModule {
     ) = activity as AdminAdapter.ProductItemClickListener
 
     @Provides
-    fun provideCartItemClickListener(
+    fun provideProductItemFromUserClickListener(
         activity: Activity,
     ) = activity as UserAdapter.ProductItemClickListener
+
+    @Provides
+    fun provideCartClickListener(
+        activity: Activity,
+    ) = activity as CartAdapterCallBacks
+
 }

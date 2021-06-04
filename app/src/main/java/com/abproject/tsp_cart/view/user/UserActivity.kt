@@ -4,16 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityUserBinding
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
 import com.abproject.tsp_cart.util.Resource
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_USER_DETAIL
-import com.abproject.tsp_cart.util.totalPriceGenerator
+import com.abproject.tsp_cart.view.cart.CartActivity
 import com.abproject.tsp_cart.view.productdetail.ProductDetailActivity
+import com.abproject.tsp_cart.view.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,11 +33,34 @@ class UserActivity : TSPActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.usernameTextUser.text = userViewModel.getUserName()
-        binding.goToCartButtonUser.setOnClickListener {
 
+        binding.usernameTextUser.text = userViewModel.getUserName()
+
+        binding.goToCartButtonUser.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
         }
+
+        binding.userLogoutButton.setOnClickListener {
+            setupLogoutSection()
+        }
+
         getObservers()
+    }
+
+    private fun setupLogoutSection() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.logoutDialogTitle))
+            .setMessage(getString(R.string.logoutDialogMessage))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                startActivity(Intent(this, SplashActivity::class.java))
+                dialog.dismiss()
+                userViewModel.clearAllInformation()
+                finish()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun getObservers() {
@@ -92,14 +118,10 @@ class UserActivity : TSPActivity(),
             thumbnailPicture = product.thumbnailPicture,
             productPictures = product.productPictures,
             amount = 1,
-            productPrice = returnProductPrice(
-                product.productPrice,
-                product.discountedProductPrice
-            ),
-            totalPrice = totalPriceGenerator(
-                1,
-                product.productPrice
-            ) ?: ""
+            productPrice = product.productPrice,
+            productInventory = product.productInventory,
+            productSold = product.productSold,
+            productDiscountedPrice = product.productDiscountPrice
         )
         userViewModel.addToCart(cart)
     }

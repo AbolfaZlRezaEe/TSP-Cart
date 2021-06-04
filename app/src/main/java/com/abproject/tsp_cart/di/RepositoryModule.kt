@@ -46,13 +46,25 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideUserRepository(
-        cartDao: CartDao,
         productDao: ProductDao,
+        cartDao: CartDao,
         sharedPreferences: SharedPreferences,
     ): UserRepository {
         return UserRepositoryImpl(
-            cartDao,
             productDao,
+            cartDao,
+            sharedPreferences
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCartRepository(
+        cartDao: CartDao,
+        sharedPreferences: SharedPreferences,
+    ): CartRepository {
+        return CartRepositoryImpl(
+            cartDao,
             sharedPreferences
         )
     }

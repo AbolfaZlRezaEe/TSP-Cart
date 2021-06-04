@@ -2,6 +2,7 @@ package com.abproject.tsp_cart.model.dataclass
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tbl_cart")
@@ -18,11 +19,15 @@ data class Cart(
     @ColumnInfo(name = "product_pictures")
     var productPictures: List<String>,
     var amount: Int,
+    @ColumnInfo(name = "product_inventory")
+    var productInventory: Long,
+    @ColumnInfo(name = "product_sold")
+    var productSold: Long,
     @ColumnInfo(name = "product_price")
-    var productPrice: String,
+    var productPrice: Long,
     @ColumnInfo(name = "product_discounted_price")
-    var productDiscountedPrice: String? = null,
-    @ColumnInfo(name = "total_price")
-    var totalPrice: String,
+    var productDiscountedPrice: Long,
+    @ColumnInfo(name = "progressbar_visible")
+    var progressBarVisible: Boolean = false,
 ) {
 }
