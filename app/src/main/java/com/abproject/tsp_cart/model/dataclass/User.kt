@@ -19,6 +19,6 @@ data class User(
     var isManager: Boolean = false,
     @ColumnInfo(name = "created_at")
     var createdAt: String,
-    @ColumnInfo(name = "last_seen")
-    var lastSeen: String = "",
+    @ColumnInfo(name = "update_at")
+    var updateAt: String? = null,
 )

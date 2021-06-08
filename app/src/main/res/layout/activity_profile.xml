@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bisque"
-    tools:context=".view.addproduct.AddProductActivity">
+    tools:context=".view.profile.ProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,37 +16,26 @@
             android:layout_height="56dp">
 
             <ImageView
-                android:id="@+id/backButtonAddProduct"
+                android:id="@+id/backButtonUserInformation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:background="?selectableItemBackground"
                 app:srcCompat="@drawable/ic_back"
                 app:tint="@color/bisque" />
 
             <TextView
-                android:id="@+id/productTitleTextView"
+                android:id="@+id/usernameTextUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/addProduct"
+                android:layout_marginStart="4dp"
+                android:text="@string/userInformation"
                 android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
                 android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/deleteButtonAddProduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_delete"
-                tools:visibility="visible" />
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -60,94 +49,111 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="16dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="16dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
-            <EditText
-                android:id="@+id/productNameEditText"
-                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/productName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/buttonChooseProfileImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/background_circle_choose_profile"
+                android:padding="10dp"
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/profileCardViewProfile"
+                app:layout_constraintEnd_toEndOf="@+id/profileCardViewProfile"
+                app:srcCompat="@drawable/ic_image" />
 
-            <EditText
-                android:id="@+id/productPriceEditText"
-                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:inputType="number"
-                android:hint="@string/productPrice"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productNameEditText" />
-
-            <EditText
-                android:id="@+id/productDiscountEditText"
-                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:inputType="number"
-                android:hint="@string/productDiscount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productPriceEditText" />
-
-            <EditText
-                android:id="@+id/productInventoryEditText"
-                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/profileCardViewProfile"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/productInventory"
-                android:inputType="number"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="@color/tan"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productDiscountEditText" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/chooseProductThumbnail"
-                style="@style/Widget.MaterialComponent.Button.TSP"
+                <ImageView
+                    android:id="@+id/profileImageViewProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <EditText
+                android:id="@+id/fullNameEditTextProfile"
+                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:backgroundTint="@color/tan"
-                android:text="@string/chooseProductThumbnail"
-                android:textColor="@color/bisque"
-                app:layout_constraintBottom_toBottomOf="@+id/productInventoryEditText"
+                android:layout_marginTop="24dp"
+                android:hint="@string/fullName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.425"
-                app:layout_constraintStart_toEndOf="@+id/productInventoryEditText"
-                app:layout_constraintTop_toTopOf="@+id/productInventoryEditText" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileCardViewProfile" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/chooseProductPicturesButton"
-                style="@style/Widget.MaterialComponent.OutlinedButton.TSP"
+            <EditText
+                android:id="@+id/usernameEditTextProfile"
+                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/chooseProductPictures"
-                android:textColor="@color/darkTan"
+                android:hint="@string/username"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chooseProductThumbnail"
-                app:strokeColor="@color/tan" />
+                app:layout_constraintTop_toBottomOf="@+id/fullNameEditTextProfile" />
+
+            <EditText
+                android:id="@+id/newPasswordEditTextProfile"
+                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/newPassword"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameEditTextProfile" />
+
+            <EditText
+                android:id="@+id/confirmPasswordEditTextProfile"
+                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/confirmPassword"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newPasswordEditTextProfile" />
+
+            <EditText
+                android:id="@+id/emailEditTextProfile"
+                style="@style/Widget.AppCompat.EditText.AddProduct.TSP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditTextProfile" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addProductFab"
+        android:id="@+id/fabUpdateUserInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_add_product" />
+        app:srcCompat="@drawable/ic_update" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,6 +15,7 @@ object Variables {
     const val EXTRA_KEY_EDIT_PRODUCT = "edit_product"
     const val REQUEST_CODE_CHOOSE_THUMBNAIL_PICTURE = 1542
     const val REQUEST_CODE_CHOOSE_PRODUCT_PICTURES = 1543
+    const val REQUEST_CODE_CHOOSE_PROFILE_PICTURES = 1544
     const val VIEW_TYPE_CART = 2
     const val VIEW_TYPE_PURCHASE = 3
 }

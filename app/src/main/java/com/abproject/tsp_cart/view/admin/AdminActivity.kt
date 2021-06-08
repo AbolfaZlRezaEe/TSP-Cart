@@ -21,6 +21,7 @@ import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_EDIT_PRODUCT
 import com.abproject.tsp_cart.view.addproduct.AddProductActivity
 import com.abproject.tsp_cart.view.auth.AuthActivity
 import com.abproject.tsp_cart.view.productdetail.ProductDetailActivity
+import com.abproject.tsp_cart.view.profile.ProfileActivity
 import com.abproject.tsp_cart.view.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,9 +44,6 @@ class AdminActivity : TSPActivity(),
 
         setupSearchInProduct()
 
-        binding.usernameTextViewAdmin.text = adminViewModel.getUserName()
-        binding.emailTextViewAdmin.text = adminViewModel.getEmail()
-
         binding.addProductAdminHome.setOnClickListener {
             startActivity(Intent(this, AddProductActivity::class.java))
         }
@@ -53,6 +51,16 @@ class AdminActivity : TSPActivity(),
         binding.logoutButtonAdmin.setOnClickListener {
             setupLogoutSection()
         }
+
+        binding.profileMaterialCard.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.usernameTextViewAdmin.text = adminViewModel.getUserName()
+        binding.emailTextViewAdmin.text = adminViewModel.getEmail()
     }
 
     private fun setupLogoutSection() {

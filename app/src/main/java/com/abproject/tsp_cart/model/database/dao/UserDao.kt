@@ -3,6 +3,7 @@ package com.abproject.tsp_cart.model.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.abproject.tsp_cart.model.dataclass.User
 
 @Dao
@@ -11,6 +12,8 @@ interface UserDao {
     @Insert
     suspend fun insertUser(user: User)
 
+    @Update
+    suspend fun updateUser(user: User)
     /**
      * this function takes a username for searching in database.
      * if username has already exists @return User and if this

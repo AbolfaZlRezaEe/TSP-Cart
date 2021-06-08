@@ -31,6 +31,8 @@ you can delete product or edit it. enjoy:)
 <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/1.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/2.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/3.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/4.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/5.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/6.jpg" alt="TSP_screen_shot" width="200"/>
 
 
+<img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/7.jpg" alt="TSP_screen_shot" width="300"/>
+
 ## Contribution
 
 If you have any ideas or issues, don't hesitate to make contact via the Issues page. Every contribution is welcome. I see every issues and pull requests you made.

@@ -46,6 +46,34 @@ class AuthRepositoryImpl @Inject constructor(
         return userDao.searchInUsersByUsername(query)
     }
 
+    override suspend fun searchInUsersByUsernameWithRealPassword(query: String): User? {
+        val result = userDao.searchInUsersByUsername(query)
+        result?.let { user ->
+            user.password = EncryptionTools(context).decryptRSA(user.password)
+            return user
+        }
+        return null
+    }
+
+    override suspend fun updateUser(user: User) {
+        user.password = EncryptionTools(context).encryptRSA(user.password)
+        clearApplicationData()
+        clearSharedPrefs()
+        saveApplicationDataInSharedPrefs(
+            username = user.username,
+            email = user.email,
+            isAdmin = user.isManager,
+            isUser = !user.isManager
+        )
+        loadApplicationData(
+            username = user.username,
+            email = user.email,
+            isAdmin = user.isManager,
+            isUser = !user.isManager
+        )
+        return userDao.updateUser(user)
+    }
+
     override fun loadApplicationData(
         username: String?,
         email: String?,
@@ -104,6 +132,21 @@ class AuthRepositoryImpl @Inject constructor(
         val isAdmin = sharedPreferences.getBoolean(SHARED_KEY_ADMIN, false)
         val isUser = sharedPreferences.getBoolean(SHARED_KEY_USER, false)
         return isAdmin && !isUser
+    }
+
+    override fun getUsernameInSharedPrefs(): String {
+        val username = sharedPreferences.getString(SHARED_KEY_USERNAME, null)
+        return username ?: ""
+    }
+
+    override fun clearSharedPrefs() {
+        sharedPreferences.edit()
+            .clear()
+            .apply()
+    }
+
+    override fun clearApplicationData() {
+        ApplicationData.clearApplicationData()
     }
 
     /**

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TSPCart">
-        <activity android:name=".view.cart.CartActivity"></activity>
+        <activity android:name=".view.profile.ProfileActivity"></activity>
+        <activity android:name=".view.cart.CartActivity" />
         <activity android:name=".view.productdetail.ProductDetailActivity" />
         <activity android:name=".view.addproduct.AddProductActivity" />
         <activity android:name=".view.user.UserActivity" />

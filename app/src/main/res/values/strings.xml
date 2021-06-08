@@ -50,4 +50,7 @@
     <string name="totalPrice">Total Price</string>
     <string name="shippingCost">Shipping Cost</string>
     <string name="PayablePrice">Payable Price</string>
+    <string name="newPassword">New Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="userInformation">User Information</string>
 </resources>
