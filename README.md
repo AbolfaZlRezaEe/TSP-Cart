@@ -28,10 +28,7 @@ you can delete product or edit it. enjoy:)
 
 ## Demo
 
-<img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/1.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/2.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/3.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/4.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/5.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/6.jpg" alt="TSP_screen_shot" width="200"/>
-
-
-<img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/7.jpg" alt="TSP_screen_shot" width="300"/>
+<img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/1.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/2.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/3.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/4.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/5.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/6.jpg" alt="TSP_screen_shot" width="200"/>  <img src="https://github.com/AbolfaZlRezaEe/TSP-Cart/blob/master/screenshots/7.jpg" alt="TSP_screen_shot" width="200"/>
 
 ## Contribution
 
