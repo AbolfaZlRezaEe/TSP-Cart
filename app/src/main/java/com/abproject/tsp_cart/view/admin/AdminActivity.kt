@@ -59,8 +59,14 @@ class AdminActivity : TSPActivity(),
 
     override fun onStart() {
         super.onStart()
-        binding.usernameTextViewAdmin.text = adminViewModel.getUserName()
-        binding.emailTextViewAdmin.text = adminViewModel.getEmail()
+        adminViewModel.getAllProduct()
+        setupShowUserInformation()
+    }
+
+    private fun setupShowUserInformation() {
+        val data = adminViewModel.getUsernameAndEmail()
+        binding.usernameTextViewAdmin.text = data.first
+        binding.emailTextViewAdmin.text = data.second
     }
 
     private fun setupLogoutSection() {
@@ -70,7 +76,7 @@ class AdminActivity : TSPActivity(),
             .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 startActivity(Intent(this, SplashActivity::class.java))
                 dialog.dismiss()
-                adminViewModel.clearAdminInformation()
+                adminViewModel.logout()
                 finish()
             }
             .setNegativeButton(getString(R.string.no)) { dialog, _ ->
@@ -87,9 +93,8 @@ class AdminActivity : TSPActivity(),
                 s?.let { string ->
                     if (string.isNotEmpty()) {
                         adminViewModel.searchInProducts(string.toString())
-                    } else {
-                        adminViewModel.searchInProducts("")
-                    }
+                    } else
+                        adminViewModel.getAllProduct()
                 }
             }
 
@@ -99,12 +104,26 @@ class AdminActivity : TSPActivity(),
 
     private fun getObservers() {
         adminViewModel.getAllProducts.observe(this) { response ->
-            if (response.isNullOrEmpty()) {
-                adminAdapter.clearData()
-                setVisibilityForEmptyState(true)
-            } else {
-                setVisibilityForEmptyState(false)
-                setupRecyclerView(response)
+            when (response) {
+                is Resource.Loading -> {
+                    showProgressBar(true)
+                }
+                is Resource.Success -> {
+                    showProgressBar(false)
+                    response.data?.let { products ->
+                        setVisibilityForEmptyState(false)
+                        setupRecyclerView(products)
+                    }
+                }
+                is Resource.Error -> {
+                    showProgressBar(false)
+                    showSnackBar(response.message!!)
+                }
+                is Resource.EmptyState -> {
+                    adminAdapter.clearData()
+                    showProgressBar(false)
+                    setVisibilityForEmptyState(true)
+                }
             }
         }
         adminViewModel.searchInProductResult.observe(this) { response ->

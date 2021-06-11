@@ -14,6 +14,10 @@ data class Cart(
     var productName: String,
     @ColumnInfo(name = "user_name")
     var userName: String,
+    @ColumnInfo(name = "product_owner")
+    var productOwner: String,
+    @ColumnInfo(name = "product_owner_email")
+    var productOwnerEmail: String,
     @ColumnInfo(name = "thumbnail_picture")
     var thumbnailPicture: String,
     @ColumnInfo(name = "product_pictures")

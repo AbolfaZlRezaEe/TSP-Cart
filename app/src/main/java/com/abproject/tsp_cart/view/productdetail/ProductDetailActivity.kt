@@ -10,11 +10,13 @@ import androidx.activity.viewModels
 import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityProductDetailBinding
 import com.abproject.tsp_cart.model.dataclass.Product
+import com.abproject.tsp_cart.model.dataclass.UserData
 import com.abproject.tsp_cart.util.Resource
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_ADMIN_DETAIL
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_USER_DETAIL
 import com.abproject.tsp_cart.util.loadImage
 import com.abproject.tsp_cart.view.cart.CartActivity
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -80,42 +82,12 @@ class ProductDetailActivity : TSPActivity() {
         }
     }
 
-//    @RequiresApi(Build.VERSION_CODES.M)
-//    private fun setupToolbar(
-//        product: Product,
-//    ) {
-//        val imageHeight = getHeightFromImageUri(
-//            uri = Uri.parse(product.thumbnailPicture),
-//            this
-//        )
-//        binding.appbarDetail.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-//            Timber.i("vertical offset-> $verticalOffset")
-//            Timber.i("image height-> $imageHeight")
-//            if (verticalOffset == 0) {
-//                binding.backImageViewDetail.setColorFilter(getColor(R.color.darkTan))
-//                binding.deleteImageViewDetail.setColorFilter(getColor(R.color.darkTan))
-//            }
-//            if (verticalOffset == imageHeight) {
-//                binding.backImageViewDetail.setColorFilter(getColor(R.color.bisque))
-//                binding.deleteImageViewDetail.setColorFilter(getColor(R.color.bisque))
-//            }
-//        })
-//    }
-
-
     private fun setupUi() {
         val resultFromAdminBundle = intent.extras?.getParcelable<Product>(EXTRA_KEY_ADMIN_DETAIL)
         val resultFromUserBundle = intent.extras?.getParcelable<Product>(EXTRA_KEY_USER_DETAIL)
 
         setUiForAdminPanel(resultFromAdminBundle)
         setUiForUserPanel(resultFromUserBundle)
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (resultFromAdminBundle != null) {
-//                setupToolbar(resultFromAdminBundle)
-//            } else
-//                setupToolbar(resultFromUserBundle!!)
-//        }
 
         binding.deleteImageViewDetail.setOnClickListener {
             setupDeleteFunctionality(resultFromAdminBundle)
@@ -143,7 +115,7 @@ class ProductDetailActivity : TSPActivity() {
             productDetailViewModel.addToCart(
                 convertProductToCartForSave(
                     product,
-                    productDetailViewModel.getUserName(),
+                    UserData.username!!,
                     1
                 )
             )
@@ -162,6 +134,13 @@ class ProductDetailActivity : TSPActivity() {
             binding.productDiscountedPriceDetail.text = "$${adminProduct.productDiscountPrice}"
             binding.productInventoryDetail.text = adminProduct.productInventory.toString()
             binding.productSoldDetail.text = adminProduct.productSold.toString()
+            binding.usernameProductOwnerProductDetail.text = product.productOwner
+            binding.emailProductOwnerProductDetail.text = product.productOwnerEmail
+            setupProductOwnerProfile(
+                username = product.productOwner,
+                email = product.productOwnerEmail,
+                profile = null
+            )
         }
     }
 
@@ -177,6 +156,43 @@ class ProductDetailActivity : TSPActivity() {
             binding.productDiscountedPriceDetail.text = "$${userProduct.productDiscountPrice}"
             binding.productInventoryDetail.text = userProduct.productInventory.toString()
             binding.productSoldDetail.text = userProduct.productSold.toString()
+            binding.usernameProductOwnerProductDetail.text = product.productOwner
+            binding.emailProductOwnerProductDetail.text = product.productOwnerEmail
+            setupProductOwnerProfile(
+                username = product.productOwner,
+                email = product.productOwnerEmail,
+                profile = null
+            )
+        }
+    }
+
+    private fun setupProductOwnerProfile(
+        username: String,
+        email: String,
+        profile: String?,
+    ) {
+        if (profile != null) {
+            showFirstCharForProductOwnerProfile(false)
+            Glide.with(this)
+                .load(Uri.parse(profile))
+                .into(binding.profileImageViewProductDetail)
+        } else {
+            showFirstCharForProductOwnerProfile(true)
+            binding.firstCharUserNameProductDetail.text =
+                username.first().toString()
+        }
+        binding.emailProductOwnerProductDetail.text = email
+    }
+
+    private fun showFirstCharForProductOwnerProfile(
+        showFirstChar: Boolean,
+    ) {
+        if (showFirstChar) {
+            binding.firstCharUserNameProductDetail.visibility = View.VISIBLE
+            binding.profileImageViewProductDetail.visibility = View.GONE
+        } else {
+            binding.firstCharUserNameProductDetail.visibility = View.GONE
+            binding.profileImageViewProductDetail.visibility = View.VISIBLE
         }
     }
 }

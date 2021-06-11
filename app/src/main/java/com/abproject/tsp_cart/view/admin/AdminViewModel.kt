@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.Product
-import com.abproject.tsp_cart.model.repository.AdminRepository
-import com.abproject.tsp_cart.model.repository.UserRepository
+import com.abproject.tsp_cart.model.dataclass.UserData
+import com.abproject.tsp_cart.model.repository.admin.AdminRepository
+import com.abproject.tsp_cart.model.repository.user.UserRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,14 +16,34 @@ import javax.inject.Inject
 @HiltViewModel
 class AdminViewModel @Inject constructor(
     private val adminRepository: AdminRepository,
-    private val userRepository: UserRepository,
 ) : TSPViewModel() {
 
-    val getAllProducts = adminRepository.getAllProducts()
 
     private val _searchInProductResult = MutableLiveData<Resource<List<Product>>>()
+    private val _getAllProducts = MutableLiveData<Resource<List<Product>>>()
 
     val searchInProductResult: LiveData<Resource<List<Product>>> get() = _searchInProductResult
+    val getAllProducts: LiveData<Resource<List<Product>>> get() = _getAllProducts
+
+    fun getAllProduct() {
+        val getAllJob = viewModelScope.launch {
+            _getAllProducts.postValue(Resource.Loading())
+            val result = adminRepository.getAllProducts()
+            if (result.isNullOrEmpty())
+                _getAllProducts.postValue(Resource.EmptyState())
+            else
+                _getAllProducts.postValue(Resource.Success(
+                    result,
+                    null
+                ))
+        }
+        getAllJob.invokeOnCompletion { throwable ->
+            throwable?.message?.let {
+                _getAllProducts.postValue(Resource.Error(null, "Unexpected error occurred!"))
+            }
+        }
+
+    }
 
     fun searchInProducts(productTitle: String) {
         val searchJob = viewModelScope.launch {
@@ -40,15 +61,13 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-    fun getUserName(): String {
-        return userRepository.getUsernameFromShredPrefs()
+    fun getUsernameAndEmail(): Pair<String, String> {
+        val username = UserData.username!!
+        val email = UserData.email!!
+        return Pair(username, email)
     }
 
-    fun getEmail(): String {
-        return userRepository.getEmailFromSharedPrefs()
-    }
-
-    fun clearAdminInformation() {
-        adminRepository.clearAdminOrUserInformation()
+    fun logout() {
+        adminRepository.logout()
     }
 }

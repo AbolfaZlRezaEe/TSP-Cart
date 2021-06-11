@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.activity.viewModels
 import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.base.TSPActivity
@@ -104,11 +105,18 @@ class ProfileActivity : TSPActivity() {
     private fun setupUi(
         user: User,
     ) {
-        user.profile?.let {
+        if (user.profile != null) {
+            showFirstCharOrProfile(false)
             Glide.with(this)
-                .load(Uri.parse(it))
+                .load(Uri.parse(user.profile))
                 .into(binding.profileImageViewProfile)
+        } else {
+            showFirstCharOrProfile(true)
+            binding.firstCharUserNameProfile.text =
+                user.username.first().toString()
         }
+
+
         binding.fullNameEditTextProfile.setText(user.fullname)
         binding.usernameEditTextProfile.setText(user.username)
         binding.emailEditTextProfile.setText(user.email)
@@ -258,11 +266,22 @@ class ProfileActivity : TSPActivity() {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CHOOSE_PROFILE_PICTURES) {
                 profileImage = data?.data!!.toString()
+                showFirstCharOrProfile(false)
                 Glide
                     .with(this)
                     .load(Uri.parse(profileImage))
                     .into(binding.profileImageViewProfile)
             }
+        }
+    }
+
+    private fun showFirstCharOrProfile(showChar: Boolean) {
+        if (showChar) {
+            binding.profileImageViewProfile.visibility = View.GONE
+            binding.firstCharUserNameProfile.visibility = View.VISIBLE
+        } else {
+            binding.profileImageViewProfile.visibility = View.VISIBLE
+            binding.firstCharUserNameProfile.visibility = View.GONE
         }
     }
 }

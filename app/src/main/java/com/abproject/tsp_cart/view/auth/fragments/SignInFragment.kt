@@ -42,42 +42,48 @@ class SignInFragment : TSPFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeSignIn()
-        getObserver()
+
+        getObservers()
+
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressCallBack)
         binding.backButtonSignIn.setOnClickListener { findNavController().popBackStack() }
 
     }
 
-    private fun getObserver() {
-        authViewModel.userExistingResult.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                }
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    response.data?.let { isSuccess ->
-                        if (isSuccess) {
-                            if (isAdmin()) {
-                                startActivity(Intent(requireActivity(),
-                                    SplashActivity::class.java).apply {
-                                    putExtra(EXTRA_KEY_ADMIN_LOGIN, true)
-                                })
-                                requireActivity().finish()
-                            } else {
-                                startActivity(Intent(requireActivity(),
-                                    SplashActivity::class.java).apply {
-                                    putExtra(EXTRA_KEY_USER_LOGIN, true)
-                                })
-                                requireActivity().finish()
+    private fun getObservers() {
+        /**
+         * this issue will be fix :))))))
+         */
+        authViewModel.checkUserInformationStatus.observe(viewLifecycleOwner) {
+            it.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is Resource.Loading -> {
+                        showProgressBar(true)
+                    }
+                    is Resource.Success -> {
+                        showProgressBar(false)
+                        response.data?.let { isSuccess ->
+                            if (isSuccess) {
+                                if (isAdmin()) {
+                                    startActivity(Intent(requireActivity(),
+                                        SplashActivity::class.java).apply {
+                                        putExtra(EXTRA_KEY_ADMIN_LOGIN, true)
+                                    })
+                                    requireActivity().finish()
+                                } else {
+                                    startActivity(Intent(requireActivity(),
+                                        SplashActivity::class.java).apply {
+                                        putExtra(EXTRA_KEY_USER_LOGIN, true)
+                                    })
+                                    requireActivity().finish()
+                                }
                             }
                         }
                     }
-
-                }
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showSnackBar(response.message!!)
+                    is Resource.Error -> {
+                        showProgressBar(false)
+                        showSnackBar(response.message!!)
+                    }
                 }
             }
         }
@@ -89,9 +95,7 @@ class SignInFragment : TSPFragment() {
                 authViewModel.checkUserInformation(
                     binding.usernameSignInEditText.text.toString(),
                     binding.passwordSignInEditText.text.toString(),
-                    isAdmin(),
-                    requireContext()
-                )
+                    isAdmin())
             } else
                 setErrorForEditTexts()
         }

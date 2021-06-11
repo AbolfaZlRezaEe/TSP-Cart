@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.Cart
-import com.abproject.tsp_cart.model.repository.AdminRepository
-import com.abproject.tsp_cart.model.repository.CartRepository
-import com.abproject.tsp_cart.model.repository.UserRepository
+import com.abproject.tsp_cart.model.repository.admin.AdminRepository
+import com.abproject.tsp_cart.model.repository.cart.CartRepository
+import com.abproject.tsp_cart.model.repository.user.UserRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val adminRepository: AdminRepository,
     private val cartRepository: CartRepository,
 ) : TSPViewModel() {
 
@@ -51,12 +50,7 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    fun getUserName(): String {
-        return userRepository.getUsernameFromShredPrefs()
+    fun logout() {
+        userRepository.logout()
     }
-
-    fun clearAllInformation() {
-        return adminRepository.clearAdminOrUserInformation()
-    }
-
 }

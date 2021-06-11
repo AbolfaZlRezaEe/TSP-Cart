@@ -192,17 +192,100 @@
                 app:layout_constraintTop_toTopOf="@+id/textView11"
                 tools:text="10" />
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/tan30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/profileCardViewProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="@color/tan"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view">
+
+                <ImageView
+                    android:id="@+id/profileImageViewProductDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/firstCharUserNameProductDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                    android:textColor="@color/bisque"
+                    android:textSize="22sp"
+                    android:visibility="gone"
+                    tools:text="A"
+                    tools:visibility="visible" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/profileCardViewProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileCardViewProfile"
+                app:layout_constraintTop_toTopOf="@+id/profileCardViewProfile">
+
+                <TextView
+                    android:id="@+id/usernameProductOwnerProductDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                    tools:text="Abolfazl Rezaei" />
+
+                <TextView
+                    android:id="@+id/emailProductOwnerProductDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                    android:textColor="@color/tan"
+                    android:textSize="12sp"
+                    tools:text="abolfazlRezaei.of@gmail.com" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/tan30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileCardViewProfile" />
+
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/description"
                 android:textAppearance="@style/TextAppearance.MyTheme.Body1"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <TextView
                 android:id="@+id/productDescriptionDetail"

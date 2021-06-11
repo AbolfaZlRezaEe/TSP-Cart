@@ -20,5 +20,5 @@ interface UserDao {
      * username didn't exist so @return null
      */
     @Query("SELECT * FROM tbl_user WHERE user_name == :usernameString")
-    suspend fun searchInUsersByUsername(usernameString: String): User?
+    suspend fun getUserInformationWithUsername(usernameString: String): User?
 }

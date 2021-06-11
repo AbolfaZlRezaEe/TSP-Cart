@@ -12,6 +12,7 @@ import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityUserBinding
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
+import com.abproject.tsp_cart.model.dataclass.UserData
 import com.abproject.tsp_cart.util.Resource
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_USER_DETAIL
 import com.abproject.tsp_cart.view.cart.CartActivity
@@ -34,7 +35,7 @@ class UserActivity : TSPActivity(),
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.usernameTextUser.text = userViewModel.getUserName()
+        binding.usernameTextUser.text = UserData.username
 
         binding.goToCartButtonUser.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
@@ -54,7 +55,7 @@ class UserActivity : TSPActivity(),
             .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 startActivity(Intent(this, SplashActivity::class.java))
                 dialog.dismiss()
-                userViewModel.clearAllInformation()
+                userViewModel.logout()
                 finish()
             }
             .setNegativeButton(getString(R.string.no)) { dialog, _ ->
@@ -114,14 +115,16 @@ class UserActivity : TSPActivity(),
     override fun onBuy(product: Product) {
         val cart = Cart(
             productName = product.productTitle,
-            userName = userViewModel.getUserName(),
+            userName = UserData.username!!,
             thumbnailPicture = product.thumbnailPicture,
             productPictures = product.productPictures,
             amount = 1,
             productPrice = product.productPrice,
             productInventory = product.productInventory,
             productSold = product.productSold,
-            productDiscountedPrice = product.productDiscountPrice
+            productDiscountedPrice = product.productDiscountPrice,
+            productOwner = product.productOwner,
+            productOwnerEmail = product.productOwnerEmail
         )
         userViewModel.addToCart(cart)
     }
@@ -130,15 +133,5 @@ class UserActivity : TSPActivity(),
         startActivity(Intent(this, ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_USER_DETAIL, product)
         })
-    }
-
-    private fun returnProductPrice(
-        productPrice: String,
-        discountedProductPrice: String,
-    ): String {
-        return if (discountedProductPrice.isNotEmpty())
-            discountedProductPrice
-        else
-            productPrice
     }
 }

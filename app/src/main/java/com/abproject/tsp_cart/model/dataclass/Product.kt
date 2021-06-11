@@ -21,6 +21,10 @@ data class Product(
     var productPrice: Long,
     @ColumnInfo(name = "discounted_product_price")
     var productDiscountPrice: Long,
+    @ColumnInfo(name = "product_owner")
+    var productOwner: String,
+    @ColumnInfo(name = "product_owner_email")
+    var productOwnerEmail: String,
     @ColumnInfo(name = "product_inventory")
     var productInventory: Long,
     @ColumnInfo(name = "product_sold")

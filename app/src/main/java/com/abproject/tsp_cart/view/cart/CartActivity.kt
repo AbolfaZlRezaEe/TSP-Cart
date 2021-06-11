@@ -153,7 +153,9 @@ class CartActivity :
             productPrice = cart.productPrice,
             productDiscountPrice = cart.productDiscountedPrice!!,
             productInventory = cart.productInventory,
-            productSold = cart.productSold
+            productSold = cart.productSold,
+            productOwner = cart.productOwner,
+            productOwnerEmail = cart.productOwnerEmail
         )
         startActivity(Intent(this, ProductDetailActivity::class.java).apply {
             putExtra(Variables.EXTRA_KEY_USER_DETAIL, product)

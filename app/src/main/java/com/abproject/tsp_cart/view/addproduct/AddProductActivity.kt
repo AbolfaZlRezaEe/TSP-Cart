@@ -14,6 +14,7 @@ import com.abproject.tsp_cart.R
 import com.abproject.tsp_cart.base.TSPActivity
 import com.abproject.tsp_cart.databinding.ActivityAddProductBinding
 import com.abproject.tsp_cart.model.dataclass.Product
+import com.abproject.tsp_cart.model.dataclass.UserData
 import com.abproject.tsp_cart.util.Resource
 import com.abproject.tsp_cart.util.Variables.EXTRA_KEY_EDIT_PRODUCT
 import com.abproject.tsp_cart.util.Variables.REQUEST_CODE_CHOOSE_PRODUCT_PICTURES
@@ -240,8 +241,11 @@ class AddProductActivity : TSPActivity() {
                     productDiscountPrice = productDiscountPrice,
                     thumbnailPicture = thumbnailUri ?: "",
                     productPictures = productPictures ?: arrayListOf(),
+                    productOwner = UserData.username!!,
                     productInventory = binding.productInventoryEditText.text.toString().toLong(),
-                    productSold = 0
+                    productSold = 0,
+                    productOwnerEmail = UserData.email!!
+
                 )
                 addProductViewModel.insertProduct(product)
             }

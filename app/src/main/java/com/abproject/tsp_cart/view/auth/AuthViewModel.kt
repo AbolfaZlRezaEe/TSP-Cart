@@ -1,13 +1,11 @@
 package com.abproject.tsp_cart.view.auth
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.User
-import com.abproject.tsp_cart.model.repository.AuthRepository
-import com.abproject.tsp_cart.util.EncryptionTools
+import com.abproject.tsp_cart.model.repository.auth.AuthRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,10 +17,10 @@ class AuthViewModel @Inject constructor(
 ) : TSPViewModel() {
 
     private val _saveUserInformationResult = MutableLiveData<Resource<Boolean>>()
-    private val _userExistingResult = MutableLiveData<Resource<Boolean>>()
+    private val _checkUserInformationStatus = MutableLiveData<LiveData<Resource<Boolean>>>()
 
     val saveUserInformationResult: LiveData<Resource<Boolean>> get() = _saveUserInformationResult
-    val userExistingResult: LiveData<Resource<Boolean>> get() = _userExistingResult
+    val checkUserInformationStatus: LiveData<LiveData<Resource<Boolean>>> get() = _checkUserInformationStatus
 
     fun saveUserInformation(
         fullName: String,
@@ -62,42 +60,13 @@ class AuthViewModel @Inject constructor(
         username: String,
         password: String,
         isAdmin: Boolean,
-        context: Context,
     ) {
-        val checkUserJob = viewModelScope.launch {
-            _userExistingResult.postValue(Resource.Loading())
-            val result = authRepository.searchInUsersByUsername(username)
-            if (result != null) {
-                val decryptedPassword = EncryptionTools(context).decryptRSA(result.password)
-                if (decryptedPassword == password) {
-
-                    authRepository.loadApplicationData(
-                        username = username,
-                        email = result.email,
-                        isAdmin = isAdmin,
-                        isUser = !isAdmin
-                    )
-
-                    authRepository.saveApplicationDataInSharedPrefs(
-                        username = username,
-                        email = result.email,
-                        isAdmin = isAdmin,
-                        isUser = !isAdmin
-                    )
-
-                    _userExistingResult.postValue(Resource.Success(true, null))
-                } else
-                    _userExistingResult.postValue(Resource.Error(null,
-                        "Password is incorrect!"))
-            } else
-                _userExistingResult.postValue(Resource.Error(null,
-                    "Username isn't valid!"))
-        }
-        checkUserJob.invokeOnCompletion { throwable ->
-            throwable?.message?.let {
-                _userExistingResult.postValue(Resource.Error(null,
-                    "Unexpected error occurred!"))
-            }
+        viewModelScope.launch {
+            _checkUserInformationStatus.postValue(authRepository.checkUserExisting(
+                username = username,
+                password = password,
+                isAdmin = isAdmin
+            ))
         }
     }
 }

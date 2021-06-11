@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.PurchaseDetail
-import com.abproject.tsp_cart.model.repository.CartRepository
+import com.abproject.tsp_cart.model.repository.cart.CartRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -99,7 +99,7 @@ class CartViewModel @Inject constructor(
     fun getAllProductsFromCart() {
         val getAllProductsJob = viewModelScope.launch {
             _getAllProductsFromCart.postValue(Resource.Loading())
-            val response = cartRepository.getAllProductsFromCartByUsername(getUserName())
+            val response = cartRepository.getAllProductsFromCartByUsername()
             if (response.isNullOrEmpty())
                 _getAllProductsFromCart.postValue(Resource.EmptyState())
             else {
@@ -156,10 +156,6 @@ class CartViewModel @Inject constructor(
                     "Unexpected error occurred!"))
             }
         }
-    }
-
-    private fun getUserName(): String {
-        return cartRepository.getUsernameFromSharedPrefs()
     }
 
 }

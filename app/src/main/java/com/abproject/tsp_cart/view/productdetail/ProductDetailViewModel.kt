@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.Cart
 import com.abproject.tsp_cart.model.dataclass.Product
-import com.abproject.tsp_cart.model.repository.AdminRepository
-import com.abproject.tsp_cart.model.repository.UserRepository
+import com.abproject.tsp_cart.model.repository.admin.AdminRepository
+import com.abproject.tsp_cart.model.repository.user.UserRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class ProductDetailViewModel @Inject constructor(
     ) {
         val addToCartJob = viewModelScope.launch {
             _addToCartStatus.postValue(Resource.Loading())
-            val result = userRepository.insertCart(cart)
+            val result = userRepository.addProductToCart(cart)
             if (result)
                 _addToCartStatus.postValue(Resource.Success(
                     true,
@@ -53,25 +53,6 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
-//    fun deleteCart(
-//        cart: Cart,
-//    ) {
-//        val deleteCartJob = viewModelScope.launch {
-//            _deleteCartStatus.postValue(Resource.Loading())
-//            userRepository.deleteProductToCart(cart)
-//            _deleteCartStatus.postValue(Resource.Success(
-//                true,
-//                "product deleted from the cart successfully!"
-//            ))
-//        }
-//        deleteCartJob.invokeOnCompletion { throwable ->
-//            throwable?.message?.let {
-//                _deleteCartStatus.postValue(Resource.Error(null,
-//                    "Unexpected error occurred!"))
-//            }
-//        }
-//    }
-
     fun deleteProduct(
         product: Product,
     ) {
@@ -91,7 +72,4 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
-    fun getUserName(): String {
-        return userRepository.getUsernameFromShredPrefs()
-    }
 }

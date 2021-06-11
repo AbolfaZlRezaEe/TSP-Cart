@@ -8,10 +8,14 @@ import com.abproject.tsp_cart.model.dataclass.Product
 interface ProductDao {
 
     @Insert
-    suspend fun insertProduct(product: Product)
+    suspend fun insertProduct(
+        product: Product,
+    )
 
     @Delete
-    suspend fun deleteProduct(product: Product)
+    suspend fun deleteProduct(
+        product: Product,
+    )
 
     @Update
     suspend fun updateProduct(product: Product)
@@ -19,9 +23,18 @@ interface ProductDao {
     @Query("SELECT * FROM tbl_product")
     fun getAllProducts(): LiveData<List<Product>>
 
+    @Query("SELECT * FROM tbl_product WHERE product_owner == :username")
+    suspend fun getAllProductsWithUsername(
+        username: String,
+    ): List<Product>
+
     @Query("SELECT * FROM tbl_product WHERE productTitle LIKE '%' || :query || '%'")
-    suspend fun searchInDatabaseByProductTitle(query: String): List<Product>
+    suspend fun searchInDatabaseByProductTitle(
+        query: String,
+    ): List<Product>
 
     @Query("SELECT * FROM tbl_product WHERE productTitle == :productTitle")
-    suspend fun searchForExistingProduct(productTitle: String): Product?
+    suspend fun searchForExistingProduct(
+        productTitle: String,
+    ): Product?
 }

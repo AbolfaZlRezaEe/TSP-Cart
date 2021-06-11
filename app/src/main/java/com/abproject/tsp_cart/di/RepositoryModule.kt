@@ -5,7 +5,16 @@ import android.content.SharedPreferences
 import com.abproject.tsp_cart.model.database.dao.CartDao
 import com.abproject.tsp_cart.model.database.dao.ProductDao
 import com.abproject.tsp_cart.model.database.dao.UserDao
-import com.abproject.tsp_cart.model.repository.*
+import com.abproject.tsp_cart.model.repository.BaseRepository
+import com.abproject.tsp_cart.model.repository.BaseRepositoryImpl
+import com.abproject.tsp_cart.model.repository.admin.AdminRepository
+import com.abproject.tsp_cart.model.repository.admin.AdminRepositoryImpl
+import com.abproject.tsp_cart.model.repository.auth.AuthRepository
+import com.abproject.tsp_cart.model.repository.auth.AuthRepositoryImpl
+import com.abproject.tsp_cart.model.repository.cart.CartRepository
+import com.abproject.tsp_cart.model.repository.cart.CartRepositoryImpl
+import com.abproject.tsp_cart.model.repository.user.UserRepository
+import com.abproject.tsp_cart.model.repository.user.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,29 +26,42 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
+
+    @Provides
+    @Singleton
+    fun provideBaseRepository(
+        sharedPreferences: SharedPreferences,
+        userDao: UserDao,
+        @ApplicationContext context: Context,
+    ): BaseRepository {
+        return BaseRepositoryImpl(
+            sharedPreferences,
+            userDao,
+            context
+        )
+    }
+
     @Provides
     @Singleton
     fun provideAdminRepository(
         productDao: ProductDao,
-        sharedPreferences: SharedPreferences,
+        baseRepository: BaseRepository,
     ): AdminRepository {
         return AdminRepositoryImpl(
             productDao,
-            sharedPreferences
+            baseRepository
         )
     }
 
     @Provides
     @Singleton
     fun provideAuthRepository(
-        @ApplicationContext context: Context,
         userDao: UserDao,
-        sharedPreferences: SharedPreferences,
+        baseRepository: BaseRepository,
     ): AuthRepository {
         return AuthRepositoryImpl(
-            context,
             userDao,
-            sharedPreferences
+            baseRepository
         )
     }
 
@@ -48,12 +70,12 @@ object RepositoryModule {
     fun provideUserRepository(
         productDao: ProductDao,
         cartDao: CartDao,
-        sharedPreferences: SharedPreferences,
+        baseRepository: BaseRepository,
     ): UserRepository {
         return UserRepositoryImpl(
             productDao,
             cartDao,
-            sharedPreferences
+            baseRepository
         )
     }
 
@@ -61,11 +83,10 @@ object RepositoryModule {
     @Singleton
     fun provideCartRepository(
         cartDao: CartDao,
-        sharedPreferences: SharedPreferences,
     ): CartRepository {
         return CartRepositoryImpl(
-            cartDao,
-            sharedPreferences
+            cartDao
         )
     }
+
 }

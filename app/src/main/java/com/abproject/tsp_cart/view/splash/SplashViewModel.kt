@@ -3,7 +3,7 @@ package com.abproject.tsp_cart.view.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abproject.tsp_cart.base.TSPViewModel
-import com.abproject.tsp_cart.model.repository.AuthRepository
+import com.abproject.tsp_cart.model.repository.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,9 +19,9 @@ class SplashViewModel @Inject constructor(
     val isAdminPanel: LiveData<Boolean> get() = _isAdminPanel
 
     fun checkData() {
-        if (authRepository.checkDataFromShared()) {
+        if (authRepository.checkDataIsExist()) {
             _isDataExisting.postValue(true)
-            if (authRepository.checkAdminPanelFromShared()) {
+            if (authRepository.checkUserDataIsAdmin()) {
                 _isAdminPanel.postValue(true)
             } else
                 _isAdminPanel.postValue(false)

@@ -43,7 +43,9 @@ abstract class TSPActivity : AppCompatActivity(), TSPInterface {
             productPrice = product.productPrice,
             productDiscountedPrice = product.productDiscountPrice,
             productInventory = product.productInventory,
-            productSold = product.productSold
+            productSold = product.productSold,
+            productOwner = product.productOwner,
+            productOwnerEmail = product.productOwnerEmail
         )
     }
 }

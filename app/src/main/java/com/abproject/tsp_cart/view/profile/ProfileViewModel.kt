@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abproject.tsp_cart.base.TSPViewModel
 import com.abproject.tsp_cart.model.dataclass.User
-import com.abproject.tsp_cart.model.repository.AuthRepository
+import com.abproject.tsp_cart.model.repository.auth.AuthRepository
 import com.abproject.tsp_cart.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class ProfileViewModel @Inject constructor(
         val getUserInformation = viewModelScope.launch {
             _getUserInformation.postValue(Resource.Loading())
             val result =
-                authRepository.searchInUsersByUsernameWithRealPassword(authRepository.getUsernameInSharedPrefs())
+                authRepository.getUserInformation()
             result?.let { user ->
                 _getUserInformation.postValue(Resource.Success(user, null))
             }
